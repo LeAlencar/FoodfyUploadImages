@@ -1,0 +1,27 @@
+{% extends "layout_admin.njk" %}
+
+{% block content %}
+
+
+  <section id="featured-admin">
+    <section class="admin-show-title">
+      <h2>Gerenciar chefs</h2><span><a class="admin-button" href="/admin/chef/create">Adicionar</a></span>
+    </section>
+    
+    <div class="cards-admin">
+    {% for recipe in recipes %}
+      <div class="card-admin" id="{{ recipes.indexOf(recipe) }}">
+        <img src="{{recipe.image}}" alt="Imagem de {{recipe.image}}">
+        <div class="admin-recipe-details">
+          <p class="recipe-name-admin">{{recipe.title}}</p>
+          <p class="recipe-author-admin">{{recipe.author}}</p>
+          <a href="/admin/recipe/{{recipes.indexOf(recipe)}}">Visualizar</a>
+        </div>
+      </div>
+
+    {% endfor %}
+    
+    </div>
+  </section>
+
+{% endblock %}
