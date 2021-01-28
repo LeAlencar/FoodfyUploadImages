@@ -10,11 +10,11 @@
     
     <div class="cards-admin">
     {% for recipe in recipes %}
-      <div class="card-admin" id="{{ recipe.id}}">
+      <div class="card-admin" id="{{ recipe.id }}">
         <img src="{{recipe.image}}" alt="Imagem de {{recipe.image}}">
         <div class="admin-recipe-details">
           <p class="recipe-name-admin">{{recipe.title}}</p>
-          <p class="recipe-author-admin">{{recipe.author}}</p>
+          <p class="recipe-author-admin">{{recipe.chef_name}}</p>
           <a href="/admin/recipe/{{recipe.id}}">Visualizar</a>
         </div>
       </div>

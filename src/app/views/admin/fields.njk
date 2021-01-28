@@ -1,106 +1,124 @@
-
-    <div class="item">
-      <div>Titulo</div>
-      <div>
-        <input 
+<div class="item">
+	<div>Titulo</div>
+	<div>
+		<input 
           type="text" 
           name="title"
           placeholder="Título da receita"
-          value="{{ recipes.title }}"
+          value="{{ recipe.title }}"
           >
-      </div>
-    </div>
+	</div>
+</div>
 
+<div class="item">
+	<div>Chef</div>
+	<div>
+		<select name="chef">
+			{% for chef in chefOptions%}
+				<option value="{{chef.id}}" {% if recipe.chef_id == chef.id %}selected {% endif %}>
+					{{chef.name}}
+				</option>
+			{% endfor %}
+		</select>
+	</div>
+</div>
 
-    <div class="item">
-      <div>Autor</div>
-      <div>
-        <input 
-          type="text" 
-          name="author"
-          placeholder="Autor da receita"
-          value="{{ recipes.author }}"
-          >
-      </div>
-    </div>
-    
-    
-    
-    <div class="item">
-      <div>Imagem da Receita</div>
-      <div>
-        <input 
-          type="url"
-          name="image"
-          placeholder="http://"
-          value="{{ recipes.image }}"
-          >
-      </div>
-    </div>
-    
+{#Campo de foto#}
+<div class="item">
+    <div>Imagem da Receita</div>
+    <div>
+        <div id="photos-upload">
+            <input 
+                id="photos-input" 
+                type="file" 
+                name="photos" 
+                multiple
+                accept="image/*"
+                onchange="PhotosUpload.handleFileInput(event)"
+                {% if not files %}required{% endif%}
+            >
+            <i class="material-icons">add</i>
+        </div>
 
-    <div class="item">
-      <div>Ingredientes</div>
-      <div id="ingredients">
-        {% for ingredient in recipes.ingredients %}
-        <div class="ingredient">
-          <input 
+        <div id="photos-preview">
+            {% if files %}
+
+                {% for image in files %}
+                    <div class="photo" id="{{image.id}}">
+                        <img src="{{image.src}}" alt="{{image.name}}" >
+                        <i class="material-icons"
+                        onclick="PhotosUpload.removeOldPhoto(event)"
+                        >close</i>
+                    </div>
+                {% endfor %}
+                <input type="hidden" name="removed_files">
+            {% endif%}
+        </div>
+    </div>
+</div>
+
+<div class="item">
+	<div>Ingredientes</div>
+	<div id="ingredients">
+		{% for ingredient in recipe.ingredients %}
+			<div class="ingredient">
+				<input 
             type="text" 
             name="ingredients[]"
             placeholder="Ingredientes da receita"
             value="{{ ingredient }}"
           >
-        </div>
-        {%else%}
-        <div class="ingredient">
-          <input 
+			</div>
+			{%else%}
+			<div class="ingredient">
+				<input 
             type="text" 
             name="ingredients[]"
             placeholder="Novo ingrediente"
             value=""
             ><br>
-        </div>
-        {%endfor%}
-      </div>
-        <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
-    </div>
+			</div>
+			{%endfor%}
+		</div>
+		<button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
+	</div>
 
-    <div class="item">
-      <div>Modo de Preparo</div>
-      <div id="prepare">
-        {% for preparation in recipes.preparation %}
-        <div class="prepareField">
-          <input 
+	<div class="item">
+		<div>Modo de Preparo</div>
+		<div id="prepare">
+			{% for preparation in recipe.preparation %}
+				<div class="prepareField">
+					<input 
             type="text" 
             name="preparation[]"
             placeholder="Modo de preparo"
             value="{{ preparation }}"
             ><br>
-        </div>
-        {%else%}
-        <div class="prepareField">
-          <input
+				</div>
+				{%else%}
+				<div class="prepareField">
+					<input
             type="text" 
             name="preparation[]"
             placeholder="Modo de preparo"
             ><br>
-        </div>
-        {%endfor%}
-      </div>
-        <button type="button" class="add-prepare">Adicionar novo passo</button>
-    </div>
+				</div>
+				{%endfor%}
+			</div>
+			<button type="button" class="add-prepare">Adicionar novo passo</button>
+		</div>
 
-    <div class="item">
-      <div>Informações adicionais</div>
-      <div>
-        <textarea
+		<div class="item">
+			<div>Informações adicionais</div>
+			<div>
+				<textarea
           class="admin-info-textarea"
           rows="15"
           name="information"
           placeholder="Informações adicionais"
           
-          >{{ recipes.information }}
-        </textarea>
-          
-      </div>
-    </div>
+          >{{ recipe.information }}
+				</textarea>
+
+			</div>
+		</div>

@@ -1,0 +1,52 @@
+{% extends "layout_admin.njk" %}
+
+
+{% block content %}
+
+
+  <section class="admin-edit-title">
+      <h2>Editando Chef</h2>
+        <span>
+          <form action="/admin/chef/create?_method=DELETE" method="POST">
+            <button type="submit">Deletar</button>
+            <input type="hidden" name="id" value="{{chef.id}}">
+          </form>
+        </span>
+        <span>
+          <button form="update" type="submit">Salvar Chef</button>
+        </span>
+        
+  </section>
+<form id="update" method="POST" action="/admin/chef/create?_method=PUT">
+  <section class="details">
+
+    <div class="item">
+      <div>Nome do Chef</div>
+      <div>
+        <input 
+          type="text"
+          name="name"
+          placeholder="Nome"
+          value="{{ chef.name }}"
+          >
+      </div>
+    </div>
+
+    <div class="item">
+      <div>Imagem do Chef</div>
+      <div>
+        <input 
+          type="url"
+          name="avatar_url"
+          placeholder="http://"
+          value="{{ chef.avatar_url }}"
+          >
+      </div>
+    </div>
+  
+  </section>
+  <input type="hidden" name="id" value="{{chef.id}}">
+</form>
+
+
+{% endblock content %}

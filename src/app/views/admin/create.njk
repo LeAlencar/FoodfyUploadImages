@@ -1,21 +1,24 @@
 {% extends "layout_admin.njk" %}
 
-
 {% block content %}
 
-<form method="post" action="/admin/recipe/create">
-  
-  <section class="admin-create-title">
-      <h2>Criando receita</h2><span><button type="submit">Salvar receita</button></span>
-  </section>
-  <section class="details">
+  <form method="post" action="/admin/recipe/create" enctype="multipart/form-data">
 
-    {% include 'admin/fields.njk' %}
-    
+    <section class="admin-create-title">
+      <h2>Criando receita</h2>
+      <span>
 
-  </section>
+        <button type="submit">Salvar receita</button>
 
-</form>
+      </span>
+    </section>
 
+    <section class="details">
+
+      {% include 'admin/fields.njk' %}
+
+    </section>
+
+  </form>
 
 {% endblock content %}

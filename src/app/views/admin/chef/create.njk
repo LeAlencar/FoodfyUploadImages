@@ -1,0 +1,43 @@
+{% extends "layout_admin.njk" %}
+
+
+{% block content %}
+
+<form method="post" action="/admin/chef/create">
+  
+  <section class="admin-create-title">
+      <h2>Criando Chef</h2><span><button type="submit">Salvar chef</button></span>
+  </section>
+  <section class="details">
+
+    <div class="item">
+      <div>Nome</div>
+      <div>
+        <input 
+          type="text" 
+          name="name"
+          placeholder="nome do chef"
+          value="{{ chef.name }}"
+          >
+      </div>
+    </div>
+
+    <div class="item">
+      <div>Avatar</div>
+      <div>
+        <input 
+          type="text" 
+          name="avatar_url"
+          placeholder="Imagem do chef"
+          value="{{ chef.avatar_url }}"
+          >
+      </div>
+    </div>
+    
+
+  </section>
+
+</form>
+
+
+{% endblock content %}

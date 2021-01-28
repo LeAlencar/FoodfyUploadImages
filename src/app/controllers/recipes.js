@@ -1,14 +1,19 @@
-const Recipe = require('../../models/recipe')
-const data = require('../../../data.json')
+const Recipe = require('../models/recipe')
 
 module.exports = {
-    index(req, res) {
-        const { filter } = req.query
+    index(req, res) { 
+        const {filter} = req.query
+        if(filter) {
+            Recipe.findBy(filter, function(recipes) {
+                return res.render("user/recipes", {recipes})
+            })
+        } else {
+            Recipe.all(function(recipes) {
+                return res.render("user/index", {recipes})
 
-        if (filter) {
-            res.render("./user/index", { recipes: data.recipes });
+            })
         }
-        res.render("./user/index", { recipes: data.recipes });
+     
     },
     
     //about
@@ -17,14 +22,27 @@ module.exports = {
     },
     // view all recipes
     view(req, res){
-        res.render("user/recipes", {recipes: data.recipes})
+        const {filter} = req.query
+        if(filter) {
+            Recipe.findBy(filter, function(recipes) {
+                return res.render("user/recipes", {recipes})
+            })
+        } else {
+            Recipe.all(function(recipes) {
+                return res.render("user/recipes", {recipes})
+
+            })
+        }
     },
+
     //show
     show(req, res) {
-        const recipe = data.recipes;
-        // get the index of the [].
-        const recipeIndex = req.params.index;
-        return res.render("../views/user/recipe", { recipe: recipe[recipeIndex]})
+        Recipe.find(req.params.id, function(recipe) {
+            if(!recipe) return res.send("Recipe not found")
+
+            return res.render("./user/recipe", {recipe})
+        })
+        
     },
     
 }

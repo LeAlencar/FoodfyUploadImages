@@ -13,7 +13,7 @@
 
     {% for recipe in recipes %}
 
-      <div class="card" id="{{ recipes.indexOf(recipe) }}">
+      <div class="card" id="{{ recipe.id }}">
         <div class="card-image">
           <img src="{{recipe.image}}" alt="Imagem de {{recipe.image}}">
         </div>
@@ -21,7 +21,7 @@
           <p>{{recipe.title}}</p>
         </div>
         <div class="card-author">
-          <p>{{recipe.author}}</p>
+          <p>{{recipe.chef_name}}</p>
         </div>
       </div>
 
@@ -30,26 +30,6 @@
     </div>
   </section>
 
-  <section id="recipes">
-    <div class="cards">
-    
-    {% for recipe in recipes %}
-
-      <div class="card" id="{{recipe.id}}">
-        <div class="card-image">
-          <img src="{{recipe.image}}" alt="Imagem de {{recipe.image}}">
-        </div>
-        <div class="card-title">
-          <p>{{recipe.title}}</p>
-        </div>
-        <div class="card-author">
-          <p>{{recipe.author}}</p>
-        </div>
-      </div>
-
-    {% endfor %}
-
-    </div>
-  </section>
+  
 
 {% endblock %}
